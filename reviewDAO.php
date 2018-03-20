@@ -21,18 +21,21 @@ function getReview($reviewID)
 	}
 }
 
+// Create a new Review (using Prepared Statements)
 function createReview($fullName, $contents)
 {
 	try
 	{
 		$cxn = connectToDB();
+		
+		//$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
+		$statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)"; //prepared statement
 
-
-		$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
-
-		$handle = $cxn->prepare( $statement );
+		$handle = $cxn->prepare($statement);
+		$handle->bindParam(':fullName', $fullName);
+		$handle->bindParam(':contents', $contents);
 		$handle->execute();
-
+		
 		//close the connection
 		$cxn = null;
 	}
@@ -40,12 +43,13 @@ function createReview($fullName, $contents)
 		print($ex->getMessage());
 	}
 }
+
 function readReviews()
 {
 	try {
 		$cxn = connectToDB();
 
-		$handle = $cxn->prepare( 'SELECT * FROM Review' );
+		$handle = $cxn->prepare( 'SELECT * FROM Review ORDER BY ReviewID DESC' );
 		$handle->execute();
 
 		// Using the fetchAll() method might be too resource-heavy if you're selecting a truly massive amount of rows.
@@ -61,15 +65,20 @@ function readReviews()
 		print($ex->getMessage());
 	}
 }
+
 function updateReview($fullName, $contents, $reviewID)
 {
 	try
 	{
 		$cxn = ConnectToDB();
 
-		$statement = "UPDATE Review SET FullName = '" . $fullName  . "', Contents = '" . $contents . "' WHERE ReviewID = " . $reviewID;
+		$statement = "UPDATE Review SET FullName = :fullName, Contents = :contents WHERE ReviewID = :reviewID";
 
 		$handle = $cxn->prepare( $statement );
+		$handle->bindParam(':fullName', $fullName);
+		$handle->bindParam(':contents', $contents);
+		$handle->bindParam(':reviewID', $contents);
+		
 		$handle->execute();
 
 		//close the connection
@@ -79,6 +88,7 @@ function updateReview($fullName, $contents, $reviewID)
 		print($ex->getMessage());
 	}
 }
+
 function deleteReview($reviewID)
 {
 	try
