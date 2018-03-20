@@ -27,13 +27,16 @@ function createReview($fullName, $contents)
 	try
 	{
 		$cxn = connectToDB();
-		
+
+		//Vulnerable to SQL Injection
 		//$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
-		$statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)"; //prepared statement
+
+		//Prepared Statement
+		$statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)";
 
 		$handle = $cxn->prepare($statement);
-		$handle->bindParam(':fullName', $fullName);
-		$handle->bindParam(':contents', $contents);
+		$handle->bindParam(':fullName', $fullName, PDO::PARAM_STR);
+		$handle->bindParam(':contents', $contents, PDO::PARAM_STR);
 		$handle->execute();
 		
 		//close the connection
@@ -72,13 +75,8 @@ function updateReview($fullName, $contents, $reviewID)
 	{
 		$cxn = ConnectToDB();
 
-		$statement = "UPDATE Review SET FullName = :fullName, Contents = :contents WHERE ReviewID = :reviewID";
-
+		$statement = "UPDATE Review SET FullName = '" . $fullName  . "', Contents = '" . $contents . "' WHERE ReviewID = " . $reviewID;
 		$handle = $cxn->prepare( $statement );
-		$handle->bindParam(':fullName', $fullName);
-		$handle->bindParam(':contents', $contents);
-		$handle->bindParam(':reviewID', $contents);
-		
 		$handle->execute();
 
 		//close the connection
@@ -96,7 +94,6 @@ function deleteReview($reviewID)
 		$cxn = ConnectToDB();
 
 		$statement = "DELETE FROM Review WHERE ReviewID = " . $reviewID;
-
 		$handle = $cxn->prepare( $statement );
 		$handle->execute();
 

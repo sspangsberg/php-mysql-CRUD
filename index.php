@@ -14,7 +14,7 @@
 <body>
   <div class='container'>
     <div class='header'>
-      <img class="headerImg" src="includes/images/phpmysql.png" width="50%" alt="">
+      <img class="headerImg" src="includes/images/phpmysql.png" width="25%" alt="">
       <h4>Database CRUD example</h4>
     </div>
     <br/>
