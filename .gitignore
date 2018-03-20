@@ -1,6 +1,6 @@
 # Specifics #
 ###################
-*.xml
+.idea/
 
 # Compiled source #
 ###################
