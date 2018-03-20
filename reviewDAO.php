@@ -28,12 +28,33 @@ function createReview($fullName, $contents)
 	{
 		$cxn = connectToDB();
 
+		/*
+		 * Dynamic SQL - Vulnerable to SQL Injection
+		 */
+		//$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
+
+		/*
+		 * Prepared Statement Approach
+		 */
+		$statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)";
+
+		$handle = $cxn->prepare($statement);
+		$handle->bindParam('fullName', $fullName);
+		$handle->bindParam('contents', $contents);
+		$handle->execute();
+
+
+		/*
+		 * Stored Procedure Approach
+		 *
 		//Stored Procedure
 		$statement = "CALL proc_create_review('$fullName', '$contents')";
 
 		$handle = $cxn->prepare($statement);
 		$handle->execute();
-		
+		*/
+
+
 		//close the connection
 		$cxn = null;
 	}
