@@ -28,15 +28,10 @@ function createReview($fullName, $contents)
 	{
 		$cxn = connectToDB();
 
-		//Vulnerable to SQL Injection
-		//$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
-
-		//Prepared Statement
-		$statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)";
+		//Stored Procedure
+		$statement = "CALL proc_create_review('$fullName', '$contents')";
 
 		$handle = $cxn->prepare($statement);
-		$handle->bindParam(':fullName', $fullName, PDO::PARAM_STR);
-		$handle->bindParam(':contents', $contents, PDO::PARAM_STR);
 		$handle->execute();
 		
 		//close the connection
