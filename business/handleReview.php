@@ -1,5 +1,5 @@
 <?php
-require( __DIR__ . "/../data/reviewDAO.php" );
+require( __DIR__ . "/../persistence/reviewDAO.php" );
 
 $action = $_GET["action"];
 

@@ -39,8 +39,8 @@ function createReview($fullName, $contents)
 		$statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)";
 
 		$handle = $cxn->prepare($statement);
-		$handle->bindParam('fullName', $fullName);
-		$handle->bindParam('contents', $contents);
+		$handle->bindParam(':fullName', $fullName);
+		$handle->bindParam(':contents', $contents);
 		$handle->execute();
 
 
@@ -141,7 +141,7 @@ function reviewTemplate($row)
     </div>
     <br>
     <a class='waves-effect waves-light btn edit'>Edit</a>
-    <a href='businessLogic/handleReview.php?action=delete&reviewID=" . $row->ReviewID . "' class='waves-effect waves-light btn edit'>Delete</a>
+    <a href='business/handleReview.php?action=delete&reviewID=" . $row->ReviewID . "' class='waves-effect waves-light btn edit'>Delete</a>
 	<br><br><br><br>";
 	
 }

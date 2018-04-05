@@ -1,4 +1,4 @@
-<?php require( __DIR__ . "/../data/reviewDAO.php" ); ?>
+<?php require( __DIR__ . "/../persistence/reviewDAO.php" ); ?>
 
 <!doctype html>
 <html>
@@ -11,7 +11,7 @@
       <h4>Database CRUD example</h4>
     </div>
     <br/>
-    <form id="reviewForm" method="POST" action="businessLogic/handleReview.php?action=create">
+    <form id="reviewForm" method="POST" action="business/handleReview.php?action=create">
       <input type="hidden" id='reviewID' name="reviewID" value="">
       <div class="input-field">
         <label for="fullName">Full Name</label>

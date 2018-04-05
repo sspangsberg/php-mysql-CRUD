@@ -30,10 +30,14 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_create_review`(IN input_fullName VARCHAR(200), IN input_contents VARCHAR(30000))
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_create_review`(
+  IN input_fullName VARCHAR(200), IN input_contents VARCHAR(30000))
+  
   BEGIN
     INSERT INTO Review (FullName, Contents) VALUES (input_fullName, input_contents);
   END$$
+
 DELIMITER ;
 
 
