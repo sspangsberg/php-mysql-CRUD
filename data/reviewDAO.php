@@ -1,5 +1,5 @@
 <?php
-require( "includes/db/connection.php" );
+require( __DIR__ . '/../includes/db/connection.php' );
 
 function getReview($reviewID)
 {
@@ -141,6 +141,7 @@ function reviewTemplate($row)
     </div>
     <br>
     <a class='waves-effect waves-light btn edit'>Edit</a>
-    <a href='handleReview.php?action=delete&reviewID=" . $row->ReviewID . "' class='waves-effect waves-light btn edit'>Delete</a>
-    <br><br><br><br>";
+    <a href='businessLogic/handleReview.php?action=delete&reviewID=" . $row->ReviewID . "' class='waves-effect waves-light btn edit'>Delete</a>
+	<br><br><br><br>";
+	
 }

@@ -1,5 +1,5 @@
 <?php
-require( "reviewDAO.php" );
+require( __DIR__ . "/../data/reviewDAO.php" );
 
 $action = $_GET["action"];
 
@@ -22,4 +22,4 @@ else if ($action == "delete")
 	$reviewID = $_GET["reviewID"];
 	deleteReview($reviewID);
 }
-header( "Location: index.php" );
+header( "Location: " . "../index.php" );

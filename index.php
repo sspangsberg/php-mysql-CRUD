@@ -1,15 +1,8 @@
-<?php require( "reviewDAO.php" ); ?>
+<?php require( __DIR__ . "/data/reviewDAO.php" ); ?>
 
 <!doctype html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PHP MySQL Database CRUD example</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-  <link rel="stylesheet" href="includes/css/main.css">
-</head>
+<?php require( __DIR__ . "/presentation/header.php"); ?>
 
 <body>
   <div class='container'>
@@ -18,7 +11,7 @@
       <h4>Database CRUD example</h4>
     </div>
     <br/>
-    <form id="reviewForm" method="POST" action="handleReview.php?action=create">
+    <form id="reviewForm" method="POST" action="businessLogic/handleReview.php?action=create">
       <input type="hidden" id='reviewID' name="reviewID" value="">
       <div class="input-field">
         <label for="fullName">Full Name</label>
@@ -36,7 +29,9 @@
     <br>
     <br>
     <br>
-    <ul id='reviews'><?php readReviews(); ?></ul>
+      <ul id='reviews'>
+           <?php readReviews(); ?>
+      </ul>
   </div>
 
   <script type="text/javascript" src="includes/js/app.js"></script>
