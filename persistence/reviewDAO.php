@@ -1,6 +1,7 @@
 <?php
 require( __DIR__ . '/../includes/db/connection.php' );
 
+
 function getReview($reviewID)
 {
 	try {
@@ -29,21 +30,26 @@ function createReview($fullName, $contents)
 		$cxn = connectToDB();
 
 		/*
+		aadf');  TRUNCATE Review; --
 		 * Dynamic SQL - Vulnerable to SQL Injection
 		 */
-		//$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
-
+		$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
+		
+		var_dump($statement);
+		//$handle = $cxn->prepare($statement);
+		//$handle->execute();
+		
 		/*
 		 * Prepared Statement Approach
 		 */
+		/*
 		$statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)";
 
 		$handle = $cxn->prepare($statement);
 		$handle->bindParam(':fullName', $fullName);
 		$handle->bindParam(':contents', $contents);
 		$handle->execute();
-
-
+		*/
 		/*
 		 * Stored Procedure Approach
 		 *
