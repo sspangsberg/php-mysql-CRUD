@@ -30,14 +30,16 @@ function createReview($fullName, $contents)
 		$cxn = connectToDB();
 
 		/*
-		aadf');  TRUNCATE Review; --
 		 * Dynamic SQL - Vulnerable to SQL Injection
 		 */
-		//$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
 		
-		//var_dump($statement);
-		//$handle = $cxn->prepare($statement);
-		//$handle->execute();
+		// //SQL Injection examples:     aadf');  TRUNCATE Review; --
+		// //INSERT INTO Review (FullName, Contents) VALUES ('not important','aadf');  TRUNCATE Review; --');
+		
+		// $statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
+		// $handle = $cxn->prepare($statement);
+		// $handle->execute();
+		
 		
 		/*
 		 * Prepared Statement Approach
@@ -45,21 +47,22 @@ function createReview($fullName, $contents)
 		
 		$statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)";
 
+		//Prepared Statements protects against SQL Injection BUT is vunerable to Cross-Site-Scripting (XSS)...
+		//XSS example: <script>alert('Hello there....');</script>
+		//XSS example: <script>window.location = 'https://www.google.com';</script>
+
 		$handle = $cxn->prepare($statement);
-		$handle->bindParam(':fullName', htmlspecialchars($fullName));
-		$handle->bindParam(':contents', htmlspecialchars($contents));
+		$handle->bindParam(':fullName', $fullName);
+		$handle->bindParam(':contents', $contents);
+		
+		// $sanitized_fullName = htmlspecialchars($fullName); //sanitize input using built-in PHP method
+		// $sanitized_contents = htmlspecialchars($contents); //sanitize input using built-in PHP method
+		// $handle->bindParam(':fullName', $sanitized_fullName);
+		// $handle->bindParam(':contents', $sanitized_contents);
+		
+		
 		$handle->execute();
 		
-		/*
-		 * Stored Procedure Approach
-		 *
-		//Stored Procedure
-		$statement = "CALL proc_create_review('$fullName', '$contents')";
-
-		$handle = $cxn->prepare($statement);
-		$handle->execute();
-		*/
-
 
 		//close the connection
 		$cxn = null;
@@ -97,8 +100,16 @@ function updateReview($fullName, $contents, $reviewID)
 	{
 		$cxn = ConnectToDB();
 
-		$statement = "UPDATE Review SET FullName = '" . $fullName  . "', Contents = '" . $contents . "' WHERE ReviewID = " . $reviewID;
+		$statement = "UPDATE Review SET FullName = :fullName, Contents = :contents WHERE ReviewID = :reviewID";
 		$handle = $cxn->prepare( $statement );
+	
+		$sanitized_fullName = htmlspecialchars($fullName);
+		$sanitized_contents = htmlspecialchars($contents);
+	
+		$handle->bindParam(':fullName', $sanitized_fullName);
+		$handle->bindParam(':contents', $sanitized_contents);
+		$handle->bindParam(':reviewID', $reviewID);
+
 		$handle->execute();
 
 		//close the connection
@@ -115,8 +126,10 @@ function deleteReview($reviewID)
 	{
 		$cxn = ConnectToDB();
 
-		$statement = "DELETE FROM Review WHERE ReviewID = " . $reviewID;
+		$statement = "DELETE FROM Review WHERE ReviewID = :reviewID";
 		$handle = $cxn->prepare( $statement );
+		$handle->bindParam(':reviewID', $reviewID);
+		
 		$handle->execute();
 
 		//close the connection
