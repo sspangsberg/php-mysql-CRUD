@@ -33,27 +33,28 @@ function createReview($fullName, $contents)
 		 * Dynamic SQL - Vulnerable to SQL Injection
 		 */
 		
-		// //SQL Injection examples:     aadf');  TRUNCATE Review; --
-		// //INSERT INTO Review (FullName, Contents) VALUES ('not important','aadf');  TRUNCATE Review; --');
+		//SQL Injection examples:     aadf');  TRUNCATE Review; --
+		//SQL Injection examples:     aadf');  DELETE FROM Review; --
+		//INSERT INTO Review (FullName, Contents) VALUES ('not important','aadf');  TRUNCATE Review; --');
 		
-		// $statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
-		// $handle = $cxn->prepare($statement);
-		// $handle->execute();
+		$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
+		$handle = $cxn->prepare($statement);
+		$handle->execute();
 		
 		
 		/*
 		 * Prepared Statement Approach
 		 */
 		
-		$statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)";
+		// $statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)";
 
-		//Prepared Statements protects against SQL Injection BUT is vunerable to Cross-Site-Scripting (XSS)...
-		//XSS example: <script>alert('Hello there....');</script>
-		//XSS example: <script>window.location = 'https://www.google.com';</script>
+		// //Prepared Statements protects against SQL Injection BUT is vunerable to Cross-Site-Scripting (XSS)...
+		// //XSS example: <script>alert('Hello there....');</script>
+		// //XSS example: <script>window.location = 'https://www.google.com';</script>
 
-		$handle = $cxn->prepare($statement);
-		$handle->bindParam(':fullName', $fullName);
-		$handle->bindParam(':contents', $contents);
+		// $handle = $cxn->prepare($statement);
+		// $handle->bindParam(':fullName', $fullName);
+		// $handle->bindParam(':contents', $contents);
 		
 		// $sanitized_fullName = htmlspecialchars($fullName); //sanitize input using built-in PHP method
 		// $sanitized_contents = htmlspecialchars($contents); //sanitize input using built-in PHP method
@@ -61,7 +62,7 @@ function createReview($fullName, $contents)
 		// $handle->bindParam(':contents', $sanitized_contents);
 		
 		
-		$handle->execute();
+		// $handle->execute();
 		
 
 		//close the connection

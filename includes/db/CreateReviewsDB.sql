@@ -24,5 +24,7 @@ DROP USER IF EXISTS 'dbuser'@'localhost';
 CREATE USER 'dbuser'@'localhost' IDENTIFIED BY '1234'; 
 GRANT SELECT, INSERT, UPDATE, DELETE ON ReviewDB.* To 'dbuser'@'localhost' IDENTIFIED BY '1234'; FLUSH PRIVILEGES;
 
+--GRANT ALL PRIVILEGES ON ReviewDB.* To 'dbuser'@'localhost' IDENTIFIED BY '1234'; FLUSH PRIVILEGES;
+
 
 
