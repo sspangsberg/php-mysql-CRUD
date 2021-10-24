@@ -40,7 +40,7 @@ function createReview($fullName, $contents)
 		$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
 		$handle = $cxn->prepare($statement);
 		$handle->execute();
-		
+		echo($statement); // comment-out the redirect in handleReview.php, line 25, to see the sql query
 		
 		/*
 		 * Prepared Statement Approach

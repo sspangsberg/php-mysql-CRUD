@@ -7,7 +7,7 @@ CREATE TABLE Review
 (
   ReviewID int AUTO_INCREMENT NOT NULL PRIMARY KEY,
   FullName varchar(200),
-  Contents varchar(30000)
+  Contents text
 );
 
 -- Insert test data
