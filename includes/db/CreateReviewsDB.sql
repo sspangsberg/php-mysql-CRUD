@@ -20,11 +20,12 @@ INSERT INTO Review (FullName, Contents) VALUES ('Eloise Tallach','Vivamus pulvin
 
 
 -- Create user and grant access to this specific database 
+-- Applies to localhost or self-hosted servers. Hosting providers most often assigns you a db user and PW
 DROP USER IF EXISTS 'dbuser'@'localhost';
 CREATE USER 'dbuser'@'localhost' IDENTIFIED BY '1234'; 
 GRANT SELECT, INSERT, UPDATE, DELETE ON ReviewDB.* To 'dbuser'@'localhost' IDENTIFIED BY '1234'; FLUSH PRIVILEGES;
 
---GRANT ALL PRIVILEGES ON ReviewDB.* To 'dbuser'@'localhost' IDENTIFIED BY '1234'; FLUSH PRIVILEGES;
+-- GRANT ALL PRIVILEGES ON ReviewDB.* To 'dbuser'@'localhost' IDENTIFIED BY '1234'; FLUSH PRIVILEGES;
 
 
 
