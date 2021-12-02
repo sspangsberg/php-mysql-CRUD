@@ -1,17 +1,17 @@
-<?php require( __DIR__ . "/../persistence/reviewDAO.php" ); ?>
-
 <!doctype html>
 <html>
-<?php require( __DIR__ . "/header.php"); ?>
+<?php require( "header.php"); ?>
+
 
 <body>
   <div class='container'>
     <div class='header'>
-      <img class="headerImg" src="includes/images/phpmysql.png" width="25%" alt="">
+      <img class="headerImg" src="<?php echo BASE_URL ?>/includes/images/phpmysql.png" width="25%" alt="">
       <h4>Database CRUD example</h4>
     </div>
+    
     <br/>
-    <form id="reviewForm" method="POST" action="business/handleReview.php?action=create">
+    <form id="reviewForm" method="POST" action="<?php echo BASE_URL ?>/controllers/ReviewController.php?action=create">
       <input type="hidden" id='reviewID' name="reviewID" value="">
       <div class="input-field">
         <label for="fullName">Full Name</label>
@@ -30,7 +30,10 @@
     <br>
     <br>
       <ul id='reviews'>
-           <?php readReviews(); ?>
+           <?php 
+            use models\ReviewModel;
+            $reviewModel = new ReviewModel();
+            $reviewModel->readReviews(); ?>
       </ul>
   </div>
 

@@ -1,18 +1,23 @@
 <?php
+
+namespace Models;
+
 require( "constants.php" );
 
-
-function connectToDB()
+class DBCon
 {
-	$link = new \PDO(
-		'mysql:host=' . DB_SERVER . ';dbname=' . DB_NAME . ';charset=utf8mb4',
-		DB_USER,
-		DB_PASS,
-		array(
-			\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-			\PDO::ATTR_PERSISTENT => false
-		)
-	);
+	function connectToDB()
+	{
+		$link = new \PDO(
+			'mysql:host=' . DB_SERVER . ';dbname=' . DB_NAME . ';charset=utf8mb4',
+			DB_USER,
+			DB_PASS,
+			array(
+				\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+				\PDO::ATTR_PERSISTENT => false
+			)
+		);
 
-	return $link;
+		return $link;
+	}
 }

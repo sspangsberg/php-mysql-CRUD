@@ -1,5 +1,12 @@
 <?php
-require( __DIR__ . '/../includes/db/connection.php' );
+
+use \models\DBCon;
+
+namespace models;
+
+class ReviewModel {
+
+function __construct() {}
 
 
 function getReview($reviewID)
@@ -76,7 +83,9 @@ function createReview($fullName, $contents)
 function readReviews()
 {
 	try {
-		$cxn = connectToDB();
+		$dbcon = new DBCon();
+		
+		$cxn = $dbcon->connectToDB();
 
 		$handle = $cxn->prepare( 'SELECT * FROM Review ORDER BY ReviewID DESC' );
 		$handle->execute();
@@ -87,7 +96,7 @@ function readReviews()
 		$result = $handle->fetchAll( \PDO::FETCH_OBJ );
 
 		foreach ( $result as $row ) {
-			print( reviewTemplate($row) );
+			print( $this->reviewTemplate($row) );
 		}
 	}
 	catch(\PDOException $ex){
@@ -161,7 +170,9 @@ function reviewTemplate($row)
     </div>
     <br>
     <a class='waves-effect waves-light btn edit'>Edit</a>
-    <a href='business/handleReview.php?action=delete&reviewID=" . $row->ReviewID . "' class='waves-effect waves-light btn edit'>Delete</a>
+    <a href='/../controllers/ReviewController.php?action=delete&reviewID=" . $row->ReviewID . "' class='waves-effect waves-light btn edit'>Delete</a>
 	<br><br><br><br>";
 	
+}
+
 }
