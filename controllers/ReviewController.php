@@ -1,6 +1,8 @@
 <?php
 
-use \models\ReviewModel;
+include "../bootstrap.php";
+
+use models\ReviewModel;
 
 $reviewModel = new ReviewModel();
 

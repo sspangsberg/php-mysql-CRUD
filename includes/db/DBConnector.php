@@ -1,10 +1,10 @@
 <?php
 
-namespace Models;
+namespace DataAccess;
 
 require( "constants.php" );
 
-class DBCon
+class DBConnector
 {
 	function connectToDB()
 	{
