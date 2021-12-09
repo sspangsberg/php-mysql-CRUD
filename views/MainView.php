@@ -5,7 +5,7 @@
 <body>
   <div class='container'>
     <div class='header'>
-      <img class="headerImg" src="<?php echo BASE_URL ?>/includes/images/phpmysql.png" width="25%" alt="">
+      <img class="headerImg" src="<?php echo BASE_URL ?>/assets/img/phpmysql.png" width="25%" alt="">
       <h4>Database CRUD example</h4>
     </div>
 
@@ -29,12 +29,7 @@
     <br>
     <br>
     <ul id='reviews'>
-      <?php
-
-      use models\ReviewModel;
-
-      $reviewModel = new ReviewModel();
-      $reviewModel->readReviews(); ?>
+      <?php (new models\ReviewModel)->readReviews(); ?>
     </ul>
   </div>
 

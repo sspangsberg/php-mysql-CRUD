@@ -17,7 +17,7 @@ function updateReviewHelper(e) {
     reviewID.value = reviewNode.querySelector(".reviewID").value;
 
     Materialize.updateTextFields();
-    reviewForm.action = "business/handleReview.php?action=edit";
+    reviewForm.action = "controllers/ReviewController.php?action=edit";
   }
 }
 

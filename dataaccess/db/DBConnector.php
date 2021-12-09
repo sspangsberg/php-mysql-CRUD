@@ -1,6 +1,6 @@
 <?php
 
-namespace DataAccess;
+namespace DataAccess\DB;
 
 require( "constants.php" );
 

@@ -3,7 +3,7 @@
 namespace models;
 
 
-use \DataAccess\DBConnector;
+use \DataAccess\DB\DBConnector;
 
 
 class BaseModel extends DBConnector {
