@@ -1,15 +1,14 @@
 
-reviews.addEventListener("click", e =>
-{
-    updateReviewHelper(e);
+reviews.addEventListener("click", e => {
+  updateReviewHelper(e);
 });
 
 function updateReviewHelper(e) {
-    var reviewForm = document.getElementById("reviewForm");
-    var fullName = document.getElementById("fullName");
-    var message = document.getElementById("message");
-    var reviewID = document.getElementById("reviewID");
-    var reviewNode = e.target.parentNode;
+  var reviewForm = document.getElementById("reviewForm");
+  var fullName = document.getElementById("fullName");
+  var message = document.getElementById("message");
+  var reviewID = document.getElementById("reviewID");
+  var reviewNode = e.target.parentNode;
 
   if (e.target.classList.contains("edit")) {
     fullName.value = reviewNode.querySelector(".fullName").innerText;

@@ -27,4 +27,4 @@ else if ($action == "delete")
 	$reviewID = $_GET["reviewID"];
 	$reviewModel->deleteReview($reviewID);
 }
-header( "Location: " . "../index.php" );
+header( "Location: " . "../" );

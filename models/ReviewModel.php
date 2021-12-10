@@ -2,17 +2,9 @@
 
 namespace models;
 
-
-use \models\BaseModel;
-
-
 class ReviewModel extends BaseModel
 {
-
-	function __construct()
-	{
-	}
-
+	function __construct() {}
 
 	function getReview($reviewID)
 	{
@@ -149,7 +141,8 @@ class ReviewModel extends BaseModel
 	function reviewTemplate($row)
 	{
 		return $template = "	
-	<div>
+		<li>
+		<div>
 	  <input class='reviewID' type=\"hidden\" name='reviewID' id='reviewID' value='" . $row->ReviewID . "' >
       
       <label>Full Name:</label>
@@ -165,7 +158,7 @@ class ReviewModel extends BaseModel
     </div>
     <br>
     <a class='waves-effect waves-light btn edit'>Edit</a>
-    <a href='" . BASE_URL . "/controllers/ReviewController.php?action=delete&reviewID=" . $row->ReviewID . "' class='waves-effect waves-light btn edit'>Delete</a>
-	<br><br><br><br>";
+    <a href='" . BASE_URL . "/controllers/ReviewController.php?action=delete&reviewID=" . $row->ReviewID . "' class='waves-effect waves-light btn'>Delete</a>
+	<br><br><br><br></li>";
 	}
 }
