@@ -7,6 +7,6 @@ route('/php-mysql-CRUD/', function () {
 });
 
 $action = $_SERVER['REQUEST_URI'];
-echo $action;
+//echo $action;
 
 dispatch($action);

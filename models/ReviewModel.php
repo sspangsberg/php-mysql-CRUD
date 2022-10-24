@@ -35,14 +35,17 @@ class ReviewModel extends BaseModel
 		 * Dynamic SQL - Vulnerable to SQL Injection
 		 */
 
-			//SQL Injection examples:     aadf');  TRUNCATE Review; --
-			//SQL Injection examples:     aadf');  DELETE FROM Review; --
+			//Procedure:
+			//Insert in review contents textfield: "aadf');  TRUNCATE Review; -- "
+
+			//SQL Injection examples:     aadf');  TRUNCATE Review; -- 
+			//SQL Injection examples:     aadf');  DELETE FROM Review; -- 
 			//INSERT INTO Review (FullName, Contents) VALUES ('not important','aadf');  TRUNCATE Review; --');
 
 			$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
 			$handle = $cxn->prepare($statement);
 			$handle->execute();
-			echo ($statement); // comment-out the redirect in handleReview.php, line 25, to see the sql query
+			echo ($statement); // comment-out the redirect in handleReview.php, line 30, to see the sql query
 
 			/*
 		 * Prepared Statement Approach

@@ -5,7 +5,7 @@ USE ReviewDB;
 --
 CREATE TABLE Review
 (
-  ReviewID int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  ReviewID int AUTO_INCREMENT NULL PRIMARY KEY,
   FullName varchar(200),
   Contents text
 );
