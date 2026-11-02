@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.SIMPLY_FTP_USERNAME }}
           password: ${{ secrets.SIMPLY_FTP_PASSWORD }}
           local-dir: ./
-          server-dir: /php-mysql-CRUD/
+          server-dir: /public_html/php-mysql-CRUD/
           exclude: |
             **/.git*
             **/.git*/**
