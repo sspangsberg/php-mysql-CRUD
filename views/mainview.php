@@ -10,7 +10,7 @@
     </div>
 
     <br />
-    <form id="reviewForm" method="POST" action="<?php echo BASE_URL ?>/controllers/ReviewController.php?action=create">
+    <form id="reviewForm" method="POST" action="<?php echo BASE_URL ?>/controllers/reviewcontroller.php?action=create">
       <input type="hidden" id='reviewID' name="reviewID" value="">
       <div class="input-field">
         <label for="fullName">Full Name</label>
@@ -29,7 +29,7 @@
     <br>
     <br>
     <ul id='reviews'>
-      <?php (new models\ReviewModel)->readReviews(); ?>
+      <?php (new models\reviewmodel)->readReviews(); ?>
     </ul>
   </div>
 
