@@ -7,7 +7,7 @@ define("BASE_URL", "http://learningeachday.tech/php-mysql-crud");
 require_once "router.php";
 
 route('/php-mysql-crud/', function () {
-    require "views/MainView.php";
+    require "views/mainview.php";
 });
 
 $action = $_SERVER['REQUEST_URI'];
