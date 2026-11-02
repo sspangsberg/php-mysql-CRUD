@@ -2,9 +2,9 @@
 
 include "../bootstrap.php";
 
-use models\ReviewModel;
+use models\reviewmodel;
 
-$reviewModel = new ReviewModel();
+$reviewModel = new reviewmodel();
 
 $action = $_GET["action"];
 

@@ -2,7 +2,7 @@
 
 namespace models;
 
-class ReviewModel extends BaseModel
+class reviewmodel extends basemodel
 {
 	function __construct() {}
 

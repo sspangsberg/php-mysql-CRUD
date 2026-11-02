@@ -3,10 +3,10 @@
 namespace models;
 
 
-use \DataAccess\DB\DBConnector;
+use \dataaccess\db\dbconnector;
 
 
-class BaseModel extends DBConnector {
+class basemodel extends dbconnector {
 
 	function __construct() {}
 }
