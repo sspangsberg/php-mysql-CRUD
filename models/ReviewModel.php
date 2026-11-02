@@ -42,32 +42,32 @@ class ReviewModel extends BaseModel
 			//SQL Injection examples:     aadf');  DELETE FROM Review; -- 
 			//INSERT INTO Review (FullName, Contents) VALUES ('not important','aadf');  TRUNCATE Review; --');
 
-			$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
-			$handle = $cxn->prepare($statement);
-			$handle->execute();
-			echo ($statement); // comment-out the redirect in /controllers/ReviewController.php, line 30, to see the sql query
+			//$statement = "INSERT INTO Review (FullName, Contents) VALUES ('" . $fullName . "','" . $contents . "')";
+			//$handle = $cxn->prepare($statement);
+			//$handle->execute();
+			//echo ($statement); // comment-out the redirect in /controllers/ReviewController.php, line 30, to see the sql query
 
 			/*
 		 * Prepared Statement Approach
 		 */
 
-			// $statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)";
+			 $statement = "INSERT INTO Review (FullName, Contents) VALUES (:fullName, :contents)";
 
 			// //Prepared Statements protects against SQL Injection BUT is vunerable to Cross-Site-Scripting (XSS)...
 			// //XSS example: <script>alert('Hello there....');</script>
 			// //XSS example: <script>window.location = 'https://www.google.com';</script>
 
-			// $handle = $cxn->prepare($statement);
+			 $handle = $cxn->prepare($statement);
 			// $handle->bindParam(':fullName', $fullName);
 			// $handle->bindParam(':contents', $contents);
 
-			// $sanitized_fullName = htmlspecialchars($fullName); //sanitize input using built-in PHP method
-			// $sanitized_contents = htmlspecialchars($contents); //sanitize input using built-in PHP method
-			// $handle->bindParam(':fullName', $sanitized_fullName);
-			// $handle->bindParam(':contents', $sanitized_contents);
+			 $sanitized_fullName = htmlspecialchars($fullName); //sanitize input using built-in PHP method
+			 $sanitized_contents = htmlspecialchars($contents); //sanitize input using built-in PHP method
+			 $handle->bindParam(':fullName', $sanitized_fullName);
+			 $handle->bindParam(':contents', $sanitized_contents);
 
 
-			// $handle->execute();
+			 $handle->execute();
 
 
 			//close the connection
